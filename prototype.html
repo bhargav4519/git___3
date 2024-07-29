@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+
+<script>
+    function person(firstName, LastName) {
+        this.firstName=firstName;
+        this.LastName=LastName;
+        
+    }
+
+    person.prototype.displayFullName =function(){
+        console.log(this.firstName+ " " + this.LastName);
+
+    }
+       
+
+    function student(firstName,LastName, batchNo,  tech){
+        person.call(this, firstName, LastName);
+        this.batchNo=batchNo;
+        this.tech=tech;
+
+    }
+    student.prototype=Object.create(person.prototype);
+    student.prototype.country="india";
+
+    let person1= new person("Ramesh" , "Lambhasangi");
+    console.log(person1);
+    console.log(person1.displayFullName());
+    let student1= new student("Ramesh" , "Lambhasangi", "1", "web");
+    console.log(student1);
+</script>
