@@ -1,5 +1,5 @@
 let object = {
-    name:"bahrgav",
+    name:"bhargav",
     age:24,
   };
   
