@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>0</h1>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+</body>
+</html>
+<script>
+    let h1 = document.querySelector("h1");
+    let count = 0;
+    let id;
+
+    // Function to start counting
+    function startCounting() {
+        if (id) return; // Prevent multiple intervals
+        id = setInterval(function() {
+            count++;
+            h1.innerText = count;
+        }, 1000);
+    }
+
+    // Function to stop counting
+    function stopCounting() {
+        clearInterval(id);
+        id = null; // Reset id to indicate the interval has been cleared
+    }
+
+    // Add event listeners for buttons
+    let stop = document.getElementById("stop");
+    let start = document.getElementById("start");
+
+    stop.addEventListener("click", stopCounting);
+    start.addEventListener("click", startCounting);
+
+    // Start counting on page load
+    startCounting();
+</script>
