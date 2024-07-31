@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <h4>This is promise method which is present in JavaScript Asynchronous method it helps to keep the promise like states "Success", " Failed"
+    ,"Pending"</h4> 
+
+<p>ex-Like payment process stages
+
+    syntax - new Promise(function(result,reject)
+    
+    in promise menthod we have 2 more variables called .then and <div class="catch">
+        .then - represents success message
+        .catch - represents failure message</p>
+</div>
+
+</body>
+</html>
+<script>
+    let result= new Promise(function(result,reject){
+        
+        setTimeout(() => {
+            
+           
+            reject("payment failed");
+
+        }, 3000);
+    });
+    console.log(result);
+
+    result.then(function(s){
+        console.log(s)
+    }).catch(function(f){
+        console.log(f);
+    })
+</script>
