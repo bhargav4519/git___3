@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    let promise1=new Promise(function(result,reject){
+        setTimeout(function(){
+            result("success");
+        },2000)
+    })
+
+    let promise2= new Promise(function(result,reject){
+        setTimeout(function(){
+            result("Promise 2")
+        },2000)
+    })
+
+    let promise3= new Promise(function(s,f){
+        setTimeout(function () {
+            f("problem promise 3")
+            
+        },2000)
+    })
+    let promiseArray= [promise1,promise2,promise3];
+    Promise.all(promiseArray).then(function(success){
+        console.log(success)
+        }).catch(function(fail){
+            console.log(fail)
+    })
+
+    
+
+</script>
