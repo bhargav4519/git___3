@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container"></div>
+</body>
+</html>
+<script>
+    let container = document.querySelector("#container");
+
+    async function getData() {
+        try {
+            let response = await fetch("https://random-data-api.com/api/restaurant/random_restaurant");
+            let data = await response.json();
+            // console.log(data)
+            appendData(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    getData();
+
+    function appendData(data) {
+        // Destructure the restaurant object
+        let { name, type, description, review, logo, phone_number, address, hours } = data;
+
+        // Create parent div
+        let parentDiv = document.createElement("div");
+
+        // Create and append elements for each property
+        // Restaurant Name
+        let pName = document.createElement("p");
+        pName.innerText = `Name: ${name}`;
+
+        // Restaurant Type
+        let pType = document.createElement("p");
+        pType.innerText = `Type: ${type}`;
+
+        // Restaurant Description
+        let pDescription = document.createElement("p");
+        pDescription.innerText = `Description: ${description}`;
+
+        // Restaurant Review
+        let pReview = document.createElement("p");
+        pReview.innerText = `Review: ${review}`;
+
+        // Restaurant Logo
+        let imgLogo = document.createElement("img");
+        imgLogo.src = logo; // Assuming logo is a URL to the image
+        imgLogo.alt = `${name} Logo`;
+
+        // Restaurant Phone Number
+        let pPhoneNumber = document.createElement("p");
+        pPhoneNumber.innerText = `Phone: ${phone_number}`;
+
+        // Restaurant Address
+        let pAddress = document.createElement("p");
+        pAddress.innerText = `Address: ${address}`;
+
+        // Restaurant Hours
+        let pHoursDiv = document.createElement("div");
+        for (let day in hours) {
+            let pDay = document.createElement("div");
+            let pDayName = document.createElement("p");
+            pDayName.innerText = day;
+            let pOpen = document.createElement("p");
+            pOpen.innerText = `Opens at: ${hours[day].opens_at}`;
+            let pClose = document.createElement("p");
+            pClose.innerText = `Closes at: ${hours[day].closes_at}`;
+            pDay.append(pDayName, pOpen, pClose);
+            pHoursDiv.append(pDay);
+        }
+
+        parentDiv.append(pName, pType, pDescription, pReview, imgLogo, pPhoneNumber, pAddress, pHoursDiv);
+        container.appendChild(parentDiv);
+    }
+</script>
