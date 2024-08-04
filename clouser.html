@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    function login(u,p){
+        return function uLogin(u1,p1){
+            if ((u===u1) && (p===p1)){
+                console.log("access granted");
+            }
+            else{
+                console.log("access denied");
+            }
+        }
+
+    }
+
+    let result= login("abc","abc");
+
+    result("abc","abc");
+</script>
