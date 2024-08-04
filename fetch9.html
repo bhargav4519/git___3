@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: auto;
+      }
+      img {
+        height: 100px;
+        width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <button onclick="HighToLow()">H-L</button>
+    <button onclick="LowToHigh()">L-H</button>
+    <input type="text" placeholder="search" id="search" oninput="filterData()" />
+    <div id="container"></div>
+
+    <script>
+      let container = document.querySelector("#container");
+      let storeData;
+
+      async function getData() {
+        try {
+          let response = await fetch("https://fakestoreapi.com/products");
+          let data = await response.json();
+          // console.log(data);
+          storeData = data;
+          appendData(data);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      getData();
+
+      function appendData(data) {
+        container.innerHTML = "";
+        data.map(function (element, index) {
+          let { title, price, image } = element;
+
+          let pDiv = document.createElement("div");
+
+          let pTitle = document.createElement("p");
+          pTitle.innerText = title;
+          let pPrice = document.createElement("p");
+          pPrice.innerText = `$${price}`; 
+          let img = document.createElement("img");
+          img.src = image;
+          pDiv.append(img, pTitle, pPrice);
+
+          container.append(pDiv);
+        });
+      }
+
+      function LowToHigh() {
+        let sortedData = storeData.sort(function (a, b) {
+          return a.price - b.price; 
+        });
+        appendData(sortedData);
+      }
+
+      function HighToLow() {
+        let sortedData = storeData.sort(function (a, b) {
+          return b.price - a.price; 
+        });
+        appendData(sortedData);
+      }
+
+      function filterData() {
+        let input = document.querySelector("#search").value.toLowerCase();  
+        let filteredData = storeData.filter(function (element) {
+          return element.title.toLowerCase().includes(input);
+        });
+        appendData(filteredData);
+      }
+    </script>
+  </body>
+</html>
